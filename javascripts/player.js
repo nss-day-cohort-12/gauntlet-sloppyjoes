@@ -59,6 +59,18 @@ Gauntlet.Combatants.Player.prototype.generateClass = function() {
   return this.class;
 };
 
+Gauntlet.Combatants.Player.prototype.setClass = function(className) {
+  // Composes the corresponding player class into the player object
+  this.class = new Gauntlet.GuildHall[className]();
+
+  // Add the health bonus
+  this.health += this.class.healthBonus;
+  this.strength += this.class.strengthBonus;
+  this.intelligence += this.class.intelligenceBonus;
+  return this.class;
+};
+
+
 /*
   Define the base properties for a human in a 
   constructor function.
@@ -75,7 +87,22 @@ Gauntlet.Combatants.Human = function() {
 
   this.allowedClasses = ["Warrior", "Berserker", "Valkyrie", "Monk"];
 };
+
 Gauntlet.Combatants.Human.prototype = new Gauntlet.Combatants.Player();
+
+Gauntlet.Combatants.NightElf = function() {
+  var randomSkin;
+
+  this.species = "NightElf";
+  this.intelligence = this.intelligence + 50;
+
+  this.skinColors.push("brown", "red", "white", "disease");
+  randomSkin = Math.round(Math.random() * (this.skinColors.length-1));
+  this.skinColor = this.skinColors[randomSkin];
+
+  this.allowedClasses = ["Shaman", "Wizard", "Conjurer", "Sorcerer"];
+};
+Gauntlet.Combatants.NightElf.prototype = new Gauntlet.Combatants.Player();
 
 
 /*
