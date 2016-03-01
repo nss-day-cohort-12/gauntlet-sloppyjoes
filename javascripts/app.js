@@ -1,5 +1,6 @@
   var playerName = "";
   var playerSpecies = "";
+  var playerClass = "";
 /*
   Test code to generate a human player and an orc player
  */
@@ -41,7 +42,7 @@ $(document).ready(function() {
         moveAlong = (playerName !== "" && playerSpecies !== "");
         break;
       case "card--weapon":
-        moveAlong = (playerName !== "");
+        moveAlong = (playerClass !== "");
         break;
     }
 
@@ -60,12 +61,21 @@ $(document).ready(function() {
     $("." + previousCard).show();
   });
 
+    //Target all of the species buttons
   $(".speciesButton").click(function(e){
-    var parentEl = e.currentTarget;
+      //When clicked look at the first child of the button with the tag name "a"
+      //target the first child of the "a" element and log it's inner HTML
     console.log($(e.currentTarget).children("a").children(".species").html());
+      //Set playerSpecies to the value of the species span's HTML
     playerSpecies = $(e.currentTarget).children("a").children(".species").html();
     return playerSpecies;
-  })
+  });
+
+  $(".classButton").click(function(e){
+    console.log($(e.currentTarget).children("a").children(".character-class").html());
+    playerClass = $(e.currentTarget).children("a").children(".character-class").html();
+    return playerClass;
+  });
 
 
 });
