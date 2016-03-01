@@ -104,6 +104,25 @@ Gauntlet.Combatants.NightElf = function() {
 };
 Gauntlet.Combatants.NightElf.prototype = new Gauntlet.Combatants.Player();
 
+Gauntlet.Combatants.Vampire = function() {
+  var randomSkin;
+
+  this.species = "Vampire";
+  this.intelligence = this.intelligence + 10;
+
+  this.skinColors.push("white", "disease");
+  randomSkin = Math.round(Math.random() * (this.skinColors.length-1));
+  this.skinColor = this.skinColors[randomSkin];
+
+  this.allowedClasses = ["Theif", "Ninja", "Assassin"];
+};
+Gauntlet.Combatants.Vampire.prototype = new Gauntlet.Combatants.Player();
+
+
+
+
+
+
 
 /*
   Define the base properties for a monster in a 
