@@ -1,6 +1,7 @@
   var playerName = "";
   var playerSpecies = "";
   var playerClass = "";
+  var Hero;
 /*
   Test code to generate a human player and an orc player
  */
@@ -40,9 +41,12 @@ $(document).ready(function() {
     switch (nextCard) {
       case "card--class":
         moveAlong = (playerName !== "" && playerSpecies !== "");
+        Hero = new Gauntlet.Combatants[playerSpecies];
+        Hero.name = playerName;
         break;
       case "card--weapon":
         moveAlong = (playerClass !== "");
+        Hero.setClass(playerClass);
         break;
     }
 
