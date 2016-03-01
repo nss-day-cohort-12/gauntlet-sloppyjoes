@@ -2,6 +2,8 @@
   var playerSpecies = "";
   var playerClass = "";
   var Hero;
+  var playerWeapon= "";
+  var playerSpell = "";
 /*
   Test code to generate a human player and an orc player
  */
@@ -48,6 +50,9 @@ $(document).ready(function() {
         moveAlong = (playerClass !== "");
         Hero.setClass(playerClass);
         break;
+      case "card--battleground" :
+        moveAlong = (playerSpell !== "" &&
+            playerWeapon !== "");
     }
 
     if (moveAlong) {
@@ -81,5 +86,16 @@ $(document).ready(function() {
     return playerClass;
   });
 
+ $(".weaponButton").click(function(e){
+    console.log($(e.currentTarget).children("a").children(".character-weapon").html());
+    playerWeapon = $(e.currentTarget).children("a").children(".character-weapon").html();
+    return playerWeapon;
+  }); 
+
+ $(".spellButton").click(function(e){
+    console.log($(e.currentTarget).children("a").children(".character-spell").html());
+    playerSpell = $(e.currentTarget).children("a").children(".character-spell").html();
+    return playerSpell;
+  });
 
 });
