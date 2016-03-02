@@ -24,10 +24,38 @@ Gauntlet.SpellBook.Spell = function() {
   An elemental sphere that can be cast by a magical class
  */
 Gauntlet.SpellBook.Sphere = function() {
-  this.name = "sphere";
+  this.name = "Sphere";
   this.damage = Math.floor(Math.random() * 10 + 10);
 
   var random = Math.round(Math.random() * (this.damageTypes.length - 1));
   this.type = this.damageTypes[random];
 };
 Gauntlet.SpellBook.Sphere.prototype = new Gauntlet.SpellBook.Spell();
+
+
+Gauntlet.SpellBook.Blast = function() {
+  this.name = "Blast";
+  this.damage = Math.floor(Math.random() * 15 + 15);
+
+  var random = Math.round(Math.random() * (this.damageTypes.length - 1));
+  this.type = this.damageTypes[random];
+};
+Gauntlet.SpellBook.Blast.prototype = new Gauntlet.SpellBook.Spell();
+
+
+Gauntlet.SpellBook.Shocker = function() {
+  this.name = "Shocker";
+  this.damage = Math.floor(Math.random() * 30 + 20);
+
+  this.type ="lightning";
+};
+Gauntlet.SpellBook.Shocker.prototype = new Gauntlet.SpellBook.Spell();
+
+
+
+
+
+
+
+
+
