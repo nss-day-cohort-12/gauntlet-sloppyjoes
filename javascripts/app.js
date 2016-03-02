@@ -53,6 +53,9 @@ $(document).ready(function() {
       case "card--battleground" :
         moveAlong = (playerSpell !== "" &&
             playerWeapon !== "");
+        cell1();
+        cell4();
+        cell6();
     }
 
     if (moveAlong) {
