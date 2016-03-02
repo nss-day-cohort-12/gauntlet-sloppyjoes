@@ -84,6 +84,7 @@ $(document).ready(function() {
     }
 
     if (moveAlong) {
+      Hero = {};
       $(".card").hide();
       $("." + nextCard).show();
     }
@@ -93,9 +94,9 @@ $(document).ready(function() {
     When the back button clicked, move back a view
    */
   $(".card__back").click(function(e) {
-    var previousCard = $(this).attr("previous");
+    // var previousCard = $(this).attr("previous");
     $(".card").hide();
-    $("." + previousCard).show();
+    $(".card--name").show();
   });
 
     //Target all of the species buttons
