@@ -44,7 +44,32 @@ $(document).ready(function() {
       case "card--class":
         moveAlong = (playerName !== "" && playerSpecies !== "");
         Hero = new Gauntlet.Combatants[playerSpecies];
-        Hero.name = playerName;
+        Hero.playerName = playerName;
+        switch (Hero.species) {
+          case "Human":
+            $(".middle-column").html("");
+            Hero.allowedClasses.forEach(function(currentString){
+            writeClass(currentString);
+            });
+            break;
+          case "NightElf":
+            $(".middle-column").html("");
+            Hero.allowedClasses.forEach(function(currentString){
+            writeClass(currentString);
+            });
+            break;
+          case "Vampire":
+            $(".middle-column").html("");
+            Hero.allowedClasses.forEach(function(currentString){
+            writeClass(currentString);
+            });
+            break;
+        };
+        $(".classButton").click(function(e){
+          console.log($(e.currentTarget).children("a").children(".character-class").html());
+          playerClass = $(e.currentTarget).children("a").children(".character-class").html();
+          return playerClass;
+        });
         break;
       case "card--weapon":
         moveAlong = (playerClass !== "");
@@ -81,12 +106,6 @@ $(document).ready(function() {
       //Set playerSpecies to the value of the species span's HTML
     playerSpecies = $(e.currentTarget).children("a").children(".species").html();
     return playerSpecies;
-  });
-
-  $(".classButton").click(function(e){
-    console.log($(e.currentTarget).children("a").children(".character-class").html());
-    playerClass = $(e.currentTarget).children("a").children(".character-class").html();
-    return playerClass;
   });
 
  $(".weaponButton").click(function(e){
