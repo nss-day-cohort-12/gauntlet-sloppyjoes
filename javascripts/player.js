@@ -114,7 +114,7 @@ Gauntlet.Combatants.Vampire = function() {
   randomSkin = Math.round(Math.random() * (this.skinColors.length-1));
   this.skinColor = this.skinColors[randomSkin];
 
-  this.allowedClasses = ["Theif", "Ninja", "Assassin"];
+  this.allowedClasses = ["Thief", "Ninja", "Assassin"];
 };
 Gauntlet.Combatants.Vampire.prototype = new Gauntlet.Combatants.Player();
 
