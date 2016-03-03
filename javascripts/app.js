@@ -8,6 +8,8 @@
   var enemyHealth;
   var playerDamage = "";
   var enemyDamage = "";
+  var enemies = ["Orc", "Zombie", "Werewolf"];
+
   //Placeholder to the spell that's generated every turn
   var newSpell;
 /*
@@ -18,10 +20,16 @@ warrior.setWeapon(new WarAxe());
 warrior.generateClass();  // This will be used for "Surprise me" option
 console.log(warrior.toString());
 
-var orc = new Gauntlet.Combatants.Orc();
-orc.generateClass();
-orc.setWeapon(new BroadSword());
-console.log(orc.toString());
+
+var orc = {};
+function generateEnemy(){
+  var random = Math.round(Math.random() * (enemies.length - 1));
+  var randomSpeciesString  = enemies[random];
+  orc = new Gauntlet.Combatants[randomSpeciesString];
+  orc.generateClass();
+  orc.setWeapon(new BroadSword());
+  console.log(orc.toString());
+}
 
 /*
   Test code to generate a spell
@@ -147,10 +155,12 @@ $(document).ready(function() {
             break;  
         };
         //Go ahead and set values for player and enemy health to be used in battle
+        generateEnemy();
         playerHealth = Hero.health;
         enemyHealth = orc.health;
         //populate cells 1, 4, and 6 using their functions
         cell1();
+        cell3();
         cell4();
         cell6();
     }
