@@ -10,6 +10,9 @@
   var enemyDamage = "";
   var enemies = ["Orc", "Zombie", "Werewolf"];
 
+  var swordHit = new Audio();
+  swordHit.src = "../audio/sword_hit.mp3";
+
   //Placeholder to the spell that's generated every turn
   var newSpell;
 /*
