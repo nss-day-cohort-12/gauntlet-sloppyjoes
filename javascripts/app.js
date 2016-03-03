@@ -61,27 +61,11 @@ $(document).ready(function() {
         moveAlong = (playerName !== "" && playerSpecies !== "");
         Hero = new Gauntlet.Combatants[playerSpecies];
         Hero.playerName = playerName;
-        $(".middle-column").html(""); //Clearing the column got rid of the need for a switch statement
-        // switch (Hero.species) {
-        //   case "Human":
-        //     $(".middle-column").html("");
+        $(".middle-column").html("");
         Hero.allowedClasses.forEach(function(currentString){
           writeClass(currentString);  
         });
-        //     break;
-        //   case "NightElf":
-        //     $(".middle-column").html("");
-        //     Hero.allowedClasses.forEach(function(currentString){
-        //     writeClass(currentString);
-        //     });
-        //     break;
-        //   case "Vampire":
-        //     $(".middle-column").html("");
-        //     Hero.allowedClasses.forEach(function(currentString){
-        //     writeClass(currentString);
-        //     });
-        //     break;
-        // };
+        
         $(".classButton").click(function(e){
           console.log($(e.currentTarget).children("a").children(".character-class").html());
           playerClass = $(e.currentTarget).children("a").children(".character-class").html();
@@ -186,6 +170,8 @@ $(document).ready(function() {
     cell3();
     cell4();
     cell6();
+    $("#player-health").removeClass("red-health");
+    $("#enemy-health").removeClass("red-health");
   })
 
   /*
@@ -218,6 +204,8 @@ $(document).ready(function() {
     $(".fight-a").removeClass("disabled");
     $("#outcome-output").html("");
     $("#battlelog").html("");
+    $("#player-health").removeClass("red-health");
+    $("#enemy-health").removeClass("red-health");
   });
 
 
@@ -256,6 +244,8 @@ $(document).ready(function() {
       //Send player and enemy damage to attack function
       attack(playerDamage, enemyDamage);
 
+      $("#player-health").addClass("red-health");
+      $("#enemy-health").addClass("red-health");
       
     }
   });
