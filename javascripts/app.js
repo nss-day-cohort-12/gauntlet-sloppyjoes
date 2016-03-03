@@ -13,6 +13,13 @@
   var swordHit = new Audio();
   swordHit.src = "../audio/sword_hit.mp3";
 
+  var victoryTune = new Audio();
+  victoryTune.src = "../audio/victory.mp3";
+
+  var defeatTune = new Audio();
+  defeatTune.src = "../audio/knockedOut.mp3";
+ 
+
   //Placeholder to the spell that's generated every turn
   var newSpell;
 /*

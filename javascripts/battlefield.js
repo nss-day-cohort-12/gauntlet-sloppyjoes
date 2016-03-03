@@ -35,6 +35,7 @@ function attack(playerDamage, enemyDamage){
   if (enemyHealth <= 0) {
     $("#outcome-output").html(`${Hero.playerName} is Victorious!`);
     $(".fight-a").addClass("disabled");
+    victoryTune.play();
   } else if (playerHealth <= 0) {
     $("#outcome-output").html(`${Hero.playerName} has been Defeated!`);
     $(".fight-a").addClass("disabled");
@@ -47,6 +48,7 @@ function attack(playerDamage, enemyDamage){
   } else if (playerHealth <= 0) {
     $("#outcome-output").html(`${Hero.playerName} has been Defeated!`);
     $(".fight-a").addClass("disabled");
+    defeatTune.play();
   }
 }
 	//Update player and enemy healths in the stat windows
