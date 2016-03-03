@@ -1,8 +1,10 @@
+
 body {
-  font-family: "Lato", "Helvetica", "sans-serif";
+  font-family: 'IM Fell English SC', serif;
   margin: 0;
   padding: 10px;
   font-size: 3em;
+  background-image:url("http://cdn.superbwallpapers.com/wallpapers/tv-shows/king-s-landing-game-of-thrones-15267-1680x1050.jpg");
 }
 
 .field {
@@ -15,8 +17,6 @@ body {
   text-align: center;
   min-width: 500px;
 }
-
-
 
 /*
   Section styles
@@ -103,3 +103,67 @@ body {
   padding: 0 50px 0 20px;
   border-radius: 0 5px 5px 0;
 }
+
+/***********************************/
+
+h1 {
+  text-align: center;
+  color: black;
+  font-weight: bold;
+}
+
+h2 {
+  text-align: center;
+  font-weight: bold;
+}
+
+ul {
+  color: white;
+  font-size: .75em;
+}
+
+img {
+  border-radius: 100%;
+  text-align: center;
+}
+
+.cell3, .cell1 {
+  text-align: center;
+}
+
+ul {
+  text-align: center;
+  list-style: none;
+  margin-top: 10%;
+}
+
+.fight-button {
+  text-align: center;
+  margin-top: 20%;
+}
+
+.cell8 {
+  text-align: center;
+}
+
+.cell5 {
+  text-align: center;
+}
+
+#battlelog {
+  text-align: center;
+  font-weight: bold;
+  color: black;
+  text-align: center;
+  font-size: 0.5em;
+  overflow-y: scroll;
+  height: 210px;
+  width: 210px;
+  margin: 0 auto;
+}
+
+
+
+
+
+
