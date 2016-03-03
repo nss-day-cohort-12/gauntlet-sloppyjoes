@@ -3,6 +3,19 @@ function cell1(){
 	$(".cell1").html(`<h2>${playerName}</h2><img src="../images/${playerSpecies}.jpg" height="150px">`);
 };
 
+function cell3(){
+	var imageURL = "";
+	switch (orc.species) {
+		case "Orc":
+			imageURL = "../images/Orc.gif";
+			break;
+		case "Zombie":
+			imageURL = "../images/Zombie.png";
+			break;
+	};
+	$(".cell3").html(`<h2>${orc.species}</h2><img src=${imageURL} height="150px">`);
+};
+
 //Add stats for user created player to cell 4 using the generated Hero object
 function cell4(){
 	$(".cell4").html(`<div id="player-stats"><ul><li>Species: ${playerSpecies}</li><li>Class: ${playerClass}</li><li id="player-health">Health: ${Hero.health}</li><li>Strength: ${Hero.strength}</li><li>Intelligence: ${Hero.intelligence}</li><li>Weapon: ${playerWeapon}</li><li>Spell: ${playerSpell}</li></ul></div>`);
@@ -17,10 +30,26 @@ function cell6(){
 function attack(playerDamage, enemyDamage){
 	//Subtract provided player's damage from enemy health and save the new value; do the same for players health with the provided enemy damage
 	enemyHealth = enemyHealth - playerDamage;
-	playerHealth = playerHealth - enemyDamage;
-	//Update player and enemy healths in the stat windows
-	$("#player-health").html(`Health: ${playerHealth}`);
 	$("#enemy-health").html(`Health: ${enemyHealth}`);
+	//Check for health status after every hit, display outcome, and put disabled class on fight button to change color
+  if (enemyHealth <= 0) {
+    $("#outcome-output").html(`${Hero.playerName} is Victorious!`);
+    $(".fight-a").addClass("disabled");
+  } else if (playerHealth <= 0) {
+    $("#outcome-output").html(`${Hero.playerName} has been Defeated!`);
+    $(".fight-a").addClass("disabled");
+  } else {
+	playerHealth = playerHealth - enemyDamage;
+	$("#player-health").html(`Health: ${playerHealth}`);
+	if (enemyHealth <= 0) {
+    $("#outcome-output").html(`${Hero.playerName} is Victorious!`);
+    $(".fight-a").addClass("disabled");
+  } else if (playerHealth <= 0) {
+    $("#outcome-output").html(`${Hero.playerName} has been Defeated!`);
+    $(".fight-a").addClass("disabled");
+  }
+}
+	//Update player and enemy healths in the stat windows
 	//Append the results of the turn to the battle log as paragraphs for formatting
 	$("#battlelog").append(`<p>${Hero.playerName} hit the enemy for ${playerDamage} damage!</p>`);
 	$("#battlelog").append(`<p>The enemy hit ${Hero.playerName} for ${enemyDamage} damage!</p>`);
