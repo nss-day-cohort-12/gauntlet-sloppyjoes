@@ -163,6 +163,7 @@ $(document).ready(function() {
         cell3();
         cell4();
         cell6();
+        // $(".continue-button").addClass("disabled");
     }
 
     if (moveAlong) {
@@ -170,6 +171,19 @@ $(document).ready(function() {
       $("." + nextCard).show();
     }
   });
+
+  $(".continue-button").click(function(){
+    generateEnemy();
+    playerHealth = Hero.health;
+    enemyHealth = orc.health;
+    $(".fight-a").removeClass("disabled");
+    $("#outcome-output").html("");
+    $("#battlelog").html("");
+    cell1();
+    cell3();
+    cell4();
+    cell6();
+  })
 
   /*
     When the back button clicked, move back a view
@@ -238,17 +252,7 @@ $(document).ready(function() {
       //Send player and enemy damage to attack function
       attack(playerDamage, enemyDamage);
 
-      //Check for health status after every hit, display outcome, and put disabled class on fight button to change color
-      if (playerHealth <= 0 && enemyHealth <= 0) {
-        $("#outcome-output").html("Draw. Unfortunately that means you're both dead.");
-        $(".fight-a").addClass("disabled");
-      } else if (enemyHealth <= 0) {
-        $("#outcome-output").html(`${Hero.playerName} is Victorious!`);
-        $(".fight-a").addClass("disabled");
-      } else if (playerHealth <= 0) {
-        $("#outcome-output").html(`${Hero.playerName} has been Defeated!`);
-        $(".fight-a").addClass("disabled");
-      }
+      
     }
   });
 

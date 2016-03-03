@@ -30,10 +30,26 @@ function cell6(){
 function attack(playerDamage, enemyDamage){
 	//Subtract provided player's damage from enemy health and save the new value; do the same for players health with the provided enemy damage
 	enemyHealth = enemyHealth - playerDamage;
-	playerHealth = playerHealth - enemyDamage;
-	//Update player and enemy healths in the stat windows
-	$("#player-health").html(`Health: ${playerHealth}`);
 	$("#enemy-health").html(`Health: ${enemyHealth}`);
+	//Check for health status after every hit, display outcome, and put disabled class on fight button to change color
+  if (enemyHealth <= 0) {
+    $("#outcome-output").html(`${Hero.playerName} is Victorious!`);
+    $(".fight-a").addClass("disabled");
+  } else if (playerHealth <= 0) {
+    $("#outcome-output").html(`${Hero.playerName} has been Defeated!`);
+    $(".fight-a").addClass("disabled");
+  } else {
+	playerHealth = playerHealth - enemyDamage;
+	$("#player-health").html(`Health: ${playerHealth}`);
+	if (enemyHealth <= 0) {
+    $("#outcome-output").html(`${Hero.playerName} is Victorious!`);
+    $(".fight-a").addClass("disabled");
+  } else if (playerHealth <= 0) {
+    $("#outcome-output").html(`${Hero.playerName} has been Defeated!`);
+    $(".fight-a").addClass("disabled");
+  }
+}
+	//Update player and enemy healths in the stat windows
 	//Append the results of the turn to the battle log as paragraphs for formatting
 	$("#battlelog").append(`<p>${Hero.playerName} hit the enemy for ${playerDamage} damage!</p>`);
 	$("#battlelog").append(`<p>The enemy hit ${Hero.playerName} for ${enemyDamage} damage!</p>`);
