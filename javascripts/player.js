@@ -21,6 +21,8 @@ Gauntlet.Combatants.Player = function(name) {
   this.strength = 90;
   this.intelligence = 90;
 
+
+
   this.toString = function() {
     var output = [this.playerName,
       ": a ",
@@ -67,6 +69,8 @@ Gauntlet.Combatants.Player.prototype.setClass = function(className) {
   this.health += this.class.healthBonus;
   this.strength += this.class.strengthBonus;
   this.intelligence += this.class.intelligenceBonus;
+  //Set magical property of Hero based on the class property or it returns undefined
+  this.magical = this.class.magical;
   return this.class;
 };
 

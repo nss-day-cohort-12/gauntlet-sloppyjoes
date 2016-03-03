@@ -4,6 +4,12 @@
   var Hero;
   var playerWeapon= "";
   var playerSpell = "";
+  var playerHealth;
+  var enemyHealth;
+  var playerDamage = "";
+  var enemyDamage = "";
+  //Placeholder to the spell that's generated every turn
+  var newSpell;
 /*
   Test code to generate a human player and an orc player
  */
@@ -22,7 +28,6 @@ console.log(orc.toString());
  */
 var spell = new Gauntlet.SpellBook.Sphere();
 console.log("spell: ", spell.toString());
-
 
 $(document).ready(function() {
   /*
@@ -45,26 +50,27 @@ $(document).ready(function() {
         moveAlong = (playerName !== "" && playerSpecies !== "");
         Hero = new Gauntlet.Combatants[playerSpecies];
         Hero.playerName = playerName;
-        switch (Hero.species) {
-          case "Human":
-            $(".middle-column").html("");
-            Hero.allowedClasses.forEach(function(currentString){
-            writeClass(currentString);
-            });
-            break;
-          case "NightElf":
-            $(".middle-column").html("");
-            Hero.allowedClasses.forEach(function(currentString){
-            writeClass(currentString);
-            });
-            break;
-          case "Vampire":
-            $(".middle-column").html("");
-            Hero.allowedClasses.forEach(function(currentString){
-            writeClass(currentString);
-            });
-            break;
-        };
+        $(".middle-column").html(""); //Clearing the column got rid of the need for a switch statement
+        // switch (Hero.species) {
+        //   case "Human":
+        //     $(".middle-column").html("");
+        Hero.allowedClasses.forEach(function(currentString){
+          writeClass(currentString);  
+        });
+        //     break;
+        //   case "NightElf":
+        //     $(".middle-column").html("");
+        //     Hero.allowedClasses.forEach(function(currentString){
+        //     writeClass(currentString);
+        //     });
+        //     break;
+        //   case "Vampire":
+        //     $(".middle-column").html("");
+        //     Hero.allowedClasses.forEach(function(currentString){
+        //     writeClass(currentString);
+        //     });
+        //     break;
+        // };
         $(".classButton").click(function(e){
           console.log($(e.currentTarget).children("a").children(".character-class").html());
           playerClass = $(e.currentTarget).children("a").children(".character-class").html();
@@ -74,17 +80,82 @@ $(document).ready(function() {
       case "card--weapon":
         moveAlong = (playerClass !== "");
         Hero.setClass(playerClass);
+        
+        //Reset the weapon and spell columns when the button is clicked
+        $(".weapon-column").html("");
+        $(".spell-column").html("");
+
+        //One by one add the weapons the Hero is strong enough to use
+        if (Hero.strength > 55) {
+          writeWeapon("Dagger");
+        };
+        if (Hero.strength > 115) {
+          writeWeapon("Broad Sword");
+        };
+        if (Hero.strength > 135) {
+          writeWeapon("War Axe");
+        };
+
+        //If hero can't have spells do nothing, else add spells hero is intelligent enough to use one by one
+        switch (Hero.magical) {
+          case false:
+            break;
+          case true:
+            if (Hero.intelligence > 115) {
+              writeSpell("Sphere");
+            };
+            if (Hero.intelligence > 185) {
+              writeSpell("Blast");
+            };
+            if (Hero.intelligence > 195) {
+              writeSpell("Shocker");
+            };
+            break;
+        };
+        //add listeners to weapon and spell buttons after they're written
+        $(".weaponButton").click(function(e){
+          console.log($(e.currentTarget).children("a").children(".character-weapon").html());
+          playerWeapon = $(e.currentTarget).children("a").children(".character-weapon").html();
+          return playerWeapon;
+        }); 
+
+        $(".spellButton").click(function(e){
+          console.log($(e.currentTarget).children("a").children(".character-spell").html());
+          playerSpell = $(e.currentTarget).children("a").children(".character-spell").html();
+          return playerSpell;
+        });
         break;
       case "card--battleground" :
-        moveAlong = (playerSpell !== "" &&
-            playerWeapon !== "");
+        //Make sure available weapons/spells have been selected before moving on to battle
+        if (Hero.magical === false) {
+          moveAlong = (playerWeapon !== "");
+        } else if (Hero.magical === true && Hero.strength < 55) {
+          moveAlong = (playerSpell !== "");
+        } else if (Hero.magical === true && Hero.strength > 55) {
+          moveAlong = (playerWeapon !== "" && playerSpell !== "");
+        };
+        //If a weapon is chosen, call setWeapon to give it to the hero 
+        switch (playerWeapon) {
+          case "Dagger":
+            Hero.setWeapon(new Dagger());
+            break;
+          case "War Axe":
+            Hero.setWeapon(new WarAxe());
+            break;
+          case "Broad Sword":
+            Hero.setWeapon(new BroadSword());
+            break;  
+        };
+        //Go ahead and set values for player and enemy health to be used in battle
+        playerHealth = Hero.health;
+        enemyHealth = orc.health;
+        //populate cells 1, 4, and 6 using their functions
         cell1();
         cell4();
         cell6();
     }
 
     if (moveAlong) {
-      Hero = {};
       $(".card").hide();
       $("." + nextCard).show();
     }
@@ -94,6 +165,7 @@ $(document).ready(function() {
     When the back button clicked, move back a view
    */
   $(".card__back").click(function(e) {
+    Hero = {};
     // var previousCard = $(this).attr("previous");
     $(".card").hide();
     $(".card--name").show();
@@ -109,16 +181,65 @@ $(document).ready(function() {
     return playerSpecies;
   });
 
- $(".weaponButton").click(function(e){
-    console.log($(e.currentTarget).children("a").children(".character-weapon").html());
-    playerWeapon = $(e.currentTarget).children("a").children(".character-weapon").html();
-    return playerWeapon;
-  }); 
+  $(".restart-button").click(function(e) {
+    //Reset Hero object, hide fight page, show name/species screen
+    //Remove disabled class from fight button, reset fight result and battlelog
+    Hero = {};
+    $(".card").hide();
+    $(".card--name").show();
+    $("#player-name").val("");
+    $(".fight-a").removeClass("disabled");
+    $("#outcome-output").html("");
+    $("#battlelog").html("");
+  });
 
- $(".spellButton").click(function(e){
-    console.log($(e.currentTarget).children("a").children(".character-spell").html());
-    playerSpell = $(e.currentTarget).children("a").children(".character-spell").html();
-    return playerSpell;
+  $(".fight-button").click(function(e){
+    //If fight button has the disabled class do nothing
+    if ($(".fight-a").hasClass("disabled")){
+      return;
+    }else {
+      //Set player damage to 0 every turn, then reset it based on present weapons and spells
+      playerDamage = 0;
+      if (playerWeapon !== "") {
+        playerDamage += Hero.weapon.damage;
+      };
+      if (playerSpell !== "") {
+        switch (playerSpell){
+          case "Sphere":
+            newSpell = new Gauntlet.SpellBook.Sphere();
+            playerDamage += newSpell.damage;
+            break;
+          case "Blast":
+            newSpell = new Gauntlet.SpellBook.Blast();
+            playerDamage += newSpell.damage;
+            break;
+          case "Shocker":
+            newSpell = new Gauntlet.SpellBook.Shocker();
+            playerDamage += newSpell.damage;
+            break;
+        };
+      };
+      //If hero is a Vampire call sneak attack at the beginning of the round to get a free hit in
+      if (Hero.species === "Vampire"){
+        sneakAttack(playerDamage);
+      };
+      //Set enemy's damage to the damage of orc's weapon
+      enemyDamage = orc.weapon.damage;
+      //Send player and enemy damage to attack function
+      attack(playerDamage, enemyDamage);
+
+      //Check for health status after every hit, display outcome, and put disabled class on fight button to change color
+      if (playerHealth <= 0 && enemyHealth <= 0) {
+        $("#outcome-output").html("Draw. Unfortunately that means you're both dead.");
+        $(".fight-a").addClass("disabled");
+      } else if (enemyHealth <= 0) {
+        $("#outcome-output").html(`${Hero.playerName} is Victorious!`);
+        $(".fight-a").addClass("disabled");
+      } else if (playerHealth <= 0) {
+        $("#outcome-output").html(`${Hero.playerName} has been Defeated!`);
+        $(".fight-a").addClass("disabled");
+      }
+    }
   });
 
 });
