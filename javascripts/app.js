@@ -193,6 +193,9 @@ $(document).ready(function() {
     $("#battlelog").html("");
   });
 
+
+
+
   $(".fight-button").click(function(e){
     //If fight button has the disabled class do nothing
     if ($(".fight-a").hasClass("disabled")){

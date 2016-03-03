@@ -11,7 +11,8 @@
 </head>
 
 <body>
-  <audio src="audio/gameofthrones.m4a" autoplay></audio>
+    <!-- <audio src="audio/gameofthrones.m4a" autoplay></audio> -->
+  
   <article id="game-container">
 
     <section id="player-setup" class="card card--name">
@@ -148,9 +149,12 @@
           <div class="col-md-4 cell2">
               
               <div class="fight-button">
+                 <audio id="sword-audio" src="audio/sword_hit.mp3"></audio>
                 <a class="btn btn--big btn--orange fight-a" href="#">
-                <span class="btn__text">ATTACK!</span>
+                 
+                <span onclick="document.getElementById("sword-audio").play()" class="btn__text">ATTACK!</span>
                 </a>
+                
               </div> 
 
           </div>
@@ -164,18 +168,14 @@
           <div class="col-md-4 cell4"></div>
           <div class="col-md-4 cell5">
             
-            <div id="battlelog" ></div>
+            <div id="battlelog"></div>
             <!-- style="overflow: scroll; height: 210px; width: 210px;" -->
 
           </div>
           <div class="col-md-4 cell6"></div>
         </div>
         <div class="row row-3">
-          <div class="col-md-4 cell7"></div>
-          <div class="col-md-4 cell8">
-            
-            <div id="outcome-output"></div>
-
+          <div class="col-md-4 cell7">
             <div class="continue-button">
               <a class="btn btn--big btn--blue" href="#">
                 <span class="btn__prompt">></span>
@@ -183,15 +183,23 @@
               </a>
             </div> 
 
-            <div class="restart-button">
+          </div>
+          <div class="col-md-4 cell8">
+            
+            <div id="outcome-output"></div>
+
+            
+           
+
+          </div>
+          <div class="col-md-4 cell9">
+             <div class="restart-button">
               <a class="btn btn--big btn--yellow" href="#">
                 <span class="btn__prompt">></span>
                 <span class="btn__text">Restart</span>
               </a>
             </div> 
-
           </div>
-          <div class="col-md-4 cell9"></div>
         </div>
         
       </div>
