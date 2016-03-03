@@ -3,6 +3,19 @@ function cell1(){
 	$(".cell1").html(`<h2>${playerName}</h2><img src="../images/${playerSpecies}.jpg" height="150px">`);
 };
 
+function cell3(){
+	var imageURL = "";
+	switch (orc.species) {
+		case "Orc":
+			imageURL = "../images/Orc.gif";
+			break;
+		case "Zombie":
+			imageURL = "../images/Zombie.png";
+			break;
+	};
+	$(".cell3").html(`<h2>${orc.species}</h2><img src=${imageURL} height="150px">`);
+};
+
 //Add stats for user created player to cell 4 using the generated Hero object
 function cell4(){
 	$(".cell4").html(`<div id="player-stats"><ul><li>Species: ${playerSpecies}</li><li>Class: ${playerClass}</li><li id="player-health">Health: ${Hero.health}</li><li>Strength: ${Hero.strength}</li><li>Intelligence: ${Hero.intelligence}</li><li>Weapon: ${playerWeapon}</li><li>Spell: ${playerSpell}</li></ul></div>`);
